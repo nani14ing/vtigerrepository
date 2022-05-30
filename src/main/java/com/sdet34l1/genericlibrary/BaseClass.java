@@ -37,6 +37,7 @@ public class BaseClass {
 	/**
 	 * this Annotation is used to open the Excel, Database and Property File.
 	 * @throws IOException
+	 * this is created by nani
 	 */
 	@BeforeSuite(groups="baseclass")
 	public void beforeSuite1Test() throws IOException {

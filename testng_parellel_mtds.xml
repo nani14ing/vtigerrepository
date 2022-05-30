@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="methods" name="Suite">
+  <test thread-count="2" parallel="methods" name="Test">
+    <classes>
+      <class name="com.vtiger.practice.TestNgPractTest">
+      <methods>
+      <include name="testNgPract1Test"/>
+      </methods>
+      </class>
+      
+      <class name="com.vtiger.practice.TestNgBasicConfigurationAnnotationPractice1Test">
+      <methods>
+      <include name="test1Test"/>
+      <include name="test2Test"/>
+      <exclude name="beforeClassTest1"/>
+      </methods>
+      </class>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

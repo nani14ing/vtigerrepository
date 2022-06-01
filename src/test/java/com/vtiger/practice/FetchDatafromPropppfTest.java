@@ -27,11 +27,12 @@ public class FetchDatafromPropppfTest extends BaseClass {
 	ProductPage Pg;
 	CreateNewProductPage NewProd;
 	ProductInformationPage Prod_info;
+	MSExcelLibrary msExcelLibrary;
 	
 	@Test
 	public void fetchDatafromPfTest() {
 
-	product_name = MSExcelLibrary.getDataFromExcel("CreateProductTest", 1, 1)+randomNumber;
+	product_name = msExcelLibrary.getDataFromExcel("CreateProductTest", 1, 1)+randomNumber;
 	ProductPage Pg= new ProductPage(driver);
 	CreateNewProductPage NewProd= new CreateNewProductPage(driver);
 	ProductInformationPage Prod_info=new ProductInformationPage(driver);

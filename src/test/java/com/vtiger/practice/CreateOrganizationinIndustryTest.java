@@ -34,20 +34,23 @@ public static void main(String[] args) throws IOException, InterruptedException 
 	JavaLibrary javautil=new JavaLibrary();
 	WebDriver driver=null;
 	
-	PropertyFileLibrary.openPropertyFile(IconstantPath.PROPERTYFILEPATH);
-	MSExcelLibrary.openExcelFile(IconstantPath.EXCELFILEPATH);
+	PropertyFileLibrary propertyFileLibrary = new PropertyFileLibrary();
+	propertyFileLibrary.openPropertyFile(IconstantPath.PROPERTYFILEPATH);
+	
+	MSExcelLibrary msExcelLibrary = new MSExcelLibrary();
+	msExcelLibrary.openExcelFile(IconstantPath.EXCELFILEPATH);
 		
-	String url = PropertyFileLibrary.getdataFromPropertyFile("url");
-	String un = PropertyFileLibrary.getdataFromPropertyFile("UN");
-	String pwd = PropertyFileLibrary.getdataFromPropertyFile("PWD");
-	//String camp_name = PropertyFileLibrary.getdataFromPropertyFile("camp_name");
-	String browser =PropertyFileLibrary.getdataFromPropertyFile("Browser");
-	String timeout = PropertyFileLibrary.getdataFromPropertyFile("timeout");
+	String url = propertyFileLibrary.getdataFromPropertyFile("url");
+	String un = propertyFileLibrary.getdataFromPropertyFile("UN");
+	String pwd = propertyFileLibrary.getdataFromPropertyFile("PWD");
+	//String camp_name = propertyFileLibrary.getdataFromPropertyFile("camp_name");
+	String browser =propertyFileLibrary.getdataFromPropertyFile("Browser");
+	String timeout = propertyFileLibrary.getdataFromPropertyFile("timeout");
 	
 	long longtime = javautil.stringToLong(timeout);	
 	int randomNumber=javautil.getRandomNumber(1000);
 	
-	String organization_name = MSExcelLibrary.getDataFromExcel("CreateOrganizationTest", 1, 1)+randomNumber;
+	String organization_name = msExcelLibrary.getDataFromExcel("CreateOrganizationTest", 1, 1)+randomNumber;
 	
 	
 	switch (browser) {
@@ -67,9 +70,11 @@ public static void main(String[] args) throws IOException, InterruptedException 
 		break;
 	}
 	
-	WebDriverLibrary.waitTillPageLoad(longtime, driver);
-	WebDriverLibrary.navigateApp(url, driver);
-	WebDriverLibrary.maximizeBrowser(driver);
+	WebDriverLibrary webDriverLibrary = new WebDriverLibrary();
+	
+	webDriverLibrary.waitTillPageLoad(longtime, driver);
+	webDriverLibrary.navigateApp(url, driver);
+	webDriverLibrary.maximizeBrowser(driver);
 	
 	
    	    
@@ -88,8 +93,8 @@ public static void main(String[] args) throws IOException, InterruptedException 
  	
  	WebElement ele2 = driver.findElement(By.name("industry"));
 	
- 	WebDriverLibrary.initializeDropDown(ele2); 	
- 	WebDriverLibrary.handleByVisibleText("Education");
+ 	webDriverLibrary.initializeDropDown(ele2); 	
+ 	webDriverLibrary.handleByVisibleText("Education");
  	
  /*
  	Select s = new Select(ele2);
@@ -99,8 +104,8 @@ public static void main(String[] args) throws IOException, InterruptedException 
  	
  	WebElement ele3 = driver.findElement(By.name("accounttype"));
 	
- 	WebDriverLibrary.initializeDropDown(ele3); 	
- 	WebDriverLibrary.handleByVisibleText("Press");
+ 	webDriverLibrary.initializeDropDown(ele3); 	
+ 	webDriverLibrary.handleByVisibleText("Press");
  	
  
 /*
@@ -127,10 +132,10 @@ public static void main(String[] args) throws IOException, InterruptedException 
 */ 	
  	
  	WebElement ele1 = driver.findElement(By.xpath("//img[@src='themes/softed/images/user.PNG']"));
- 	WebDriverLibrary.mouseHoverOnTheElement(ele1, driver);
+ 	webDriverLibrary.mouseHoverOnTheElement(ele1, webDriverLibrary);
  	
     driver.findElement(By.xpath("//a[.='Sign Out']")).click();
  	
- 	WebDriverLibrary.quitBrowser(driver);
+    webDriverLibrary.quitBrowser(driver);
 }
 }

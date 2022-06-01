@@ -20,36 +20,39 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class javaScriptEcecutor {
 
 	public static void main(String[] args) throws IOException {
+
+		WebDriverLibrary webDriverLibrary = new WebDriverLibrary();
 		
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver=new ChromeDriver();
-		WebDriverLibrary.initializeJs(driver);
+		webDriverLibrary.initializeJs(driver);
 		driver.manage().window().maximize();
 
 		
-		WebDriverLibrary.navigateAppThroughJs("http://localhost:8888");
+		
+		webDriverLibrary.navigateAppThroughJs("http://localhost:8888");
 		//js.executeScript("window.location='http://localhost:8888'");
 		
 		
-		WebDriverLibrary.enterDataThroughJs(driver.findElement(By.name("user_name")), "admin");
+		webDriverLibrary.enterDataThroughJs(driver.findElement(By.name("user_name")), "admin");
 		//js.executeScript("arguments[0].value=argumnets[1]", driver.findElement(By.name("user_name")));
 		
 
-		WebDriverLibrary.enterDataThroughJs(driver.findElement(By.name("user_password")), "admin");
+		webDriverLibrary.enterDataThroughJs(driver.findElement(By.name("user_password")), "admin");
 		//js.executeScript("arguments[0].value=argumnets[1]", driver.findElement(By.name("user_password")));
 		
 
-		WebDriverLibrary.clickThroughJs(driver.findElement(By.id("submitButton")));
+		webDriverLibrary.clickThroughJs(driver.findElement(By.id("submitButton")));
 		//js.executeScript("arguments[0].click()", driver.findElement(By.id("submitButton")));
 		
 		
 		//js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 		
-		WebDriverLibrary.scrollTillElement(driver.findElement(By.xpath("//b[contains(.,' Upcoming Activities')]")));
+		webDriverLibrary.scrollTillElement(driver.findElement(By.xpath("//b[contains(.,' Upcoming Activities')]")));
 		//js.executeScript("arguments[0].scrollIntoView()", driver.findElement(By.xpath("//b[contains(.,' Upcoming Activities')]")));
 		
 		String fileName = new javaScriptEcecutor().getClass().getName();
-		WebDriverLibrary.takeScreenShot(fileName, driver);
+		webDriverLibrary.takeScreenShot(fileName, driver);
 		
  /*	
 		TakesScreenshot ts=(TakesScreenshot) driver;

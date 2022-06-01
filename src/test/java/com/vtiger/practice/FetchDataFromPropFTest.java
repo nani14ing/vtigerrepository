@@ -28,21 +28,24 @@ public static void main(String[] args) throws IOException {
 	JavaLibrary javautil=new JavaLibrary();
 	WebDriver driver=null;
 	
-	PropertyFileLibrary.openPropertyFile(IconstantPath.PROPERTYFILEPATH);
-	MSExcelLibrary.openExcelFile(IconstantPath.EXCELFILEPATH);
+	PropertyFileLibrary propertyFileLibrary = new PropertyFileLibrary();
+	propertyFileLibrary.openPropertyFile(IconstantPath.PROPERTYFILEPATH);
 	
-	String url = PropertyFileLibrary.getdataFromPropertyFile("url");
-	String un = PropertyFileLibrary.getdataFromPropertyFile("UN");
-	String pwd = PropertyFileLibrary.getdataFromPropertyFile("PWD");
+	MSExcelLibrary msExcelLibrary = new MSExcelLibrary();
+	msExcelLibrary.openExcelFile(IconstantPath.EXCELFILEPATH);
+	
+	String url = propertyFileLibrary.getdataFromPropertyFile("url");
+	String un = propertyFileLibrary.getdataFromPropertyFile("UN");
+	String pwd = propertyFileLibrary.getdataFromPropertyFile("PWD");
 	//String camp_name = PropertyFileLibrary.getdataFromPropertyFile("camp_name");
-	String browser =PropertyFileLibrary.getdataFromPropertyFile("Browser");
-	String timeout = PropertyFileLibrary.getdataFromPropertyFile("timeout");
+	String browser =propertyFileLibrary.getdataFromPropertyFile("Browser");
+	String timeout = propertyFileLibrary.getdataFromPropertyFile("timeout");
 	
 	long longtime = javautil.stringToLong(timeout);
 	
 	int randomNumber=javautil.getRandomNumber(1000);
 	
-	String Camp_name = MSExcelLibrary.getDataFromExcel("CreateCampaignTest", 1, 1)+randomNumber;
+	String Camp_name = msExcelLibrary.getDataFromExcel("CreateCampaignTest", 1, 1)+randomNumber;
 
 
 /*
@@ -66,9 +69,11 @@ public static void main(String[] args) throws IOException {
 		break;
 	}
 	
-	WebDriverLibrary.browserSetting(longtime, driver);
-	WebDriverLibrary.navigateApp(url, driver);
-	WebDriverLibrary.maximizeBrowser(driver);
+	WebDriverLibrary webDriverLibrary = new WebDriverLibrary();
+	
+	webDriverLibrary.browserSetting(longtime, driver);
+	webDriverLibrary.navigateApp(url, driver);
+	webDriverLibrary.maximizeBrowser(driver);
 	
 /*	
 	driver.get(url);
@@ -82,7 +87,7 @@ public static void main(String[] args) throws IOException {
 	
 	//mouseover action
 	WebElement ele1 = driver.findElement(By.xpath("//img[@src='themes/softed/images/menuDnArrow.gif']"));
-	WebDriverLibrary.mouseHoverOnTheElement(ele1, driver);
+	webDriverLibrary.mouseHoverOnTheElement(ele1, webDriverLibrary);
 
 	driver.findElement(By.xpath("//a[@href='index.php?module=Campaigns&action=index']")).click();
 	
@@ -92,11 +97,11 @@ public static void main(String[] args) throws IOException {
 	driver.findElement(By.xpath("//input[@type='submit'and @value=\"  Save  \"]")).click();
 	
 	ele1 = driver.findElement(By.xpath("//img[@src='themes/softed/images/user.PNG']"));
-	WebDriverLibrary.mouseHoverOnTheElement(ele1, driver);
+	webDriverLibrary.mouseHoverOnTheElement(ele1, webDriverLibrary);
 	
 	driver.findElement(By.xpath("//a[@href='index.php?module=Users&action=Logout']")).click();
 	
-	WebDriverLibrary.quitBrowser(driver);
+	webDriverLibrary.quitBrowser(driver);
 }
 }
 

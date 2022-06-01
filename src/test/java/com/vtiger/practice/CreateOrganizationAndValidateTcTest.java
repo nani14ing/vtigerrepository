@@ -30,19 +30,22 @@ public static void main(String[] args) throws IOException, InterruptedException 
 	
 	//property file................
 	
-	PropertyFileLibrary.openPropertyFile(IconstantPath.PROPERTYFILEPATH);
-	MSExcelLibrary.openExcelFile(IconstantPath.EXCELFILEPATH);
+	PropertyFileLibrary propertyFileLibrary = new PropertyFileLibrary();
+	propertyFileLibrary.openPropertyFile(IconstantPath.PROPERTYFILEPATH);
 	
-	String url = PropertyFileLibrary.getdataFromPropertyFile("url");
-	String un = PropertyFileLibrary.getdataFromPropertyFile("UN");
-	String pwd = PropertyFileLibrary.getdataFromPropertyFile("PWD");
-	String browser = PropertyFileLibrary.getdataFromPropertyFile("Browser");
-	String timeout = PropertyFileLibrary.getdataFromPropertyFile("timeout");
+	MSExcelLibrary msExcelLibrary = new MSExcelLibrary();
+	msExcelLibrary.openExcelFile(IconstantPath.EXCELFILEPATH);
+	
+	String url = propertyFileLibrary.getdataFromPropertyFile("url");
+	String un = propertyFileLibrary.getdataFromPropertyFile("UN");
+	String pwd = propertyFileLibrary.getdataFromPropertyFile("PWD");
+	String browser = propertyFileLibrary.getdataFromPropertyFile("Browser");
+	String timeout = propertyFileLibrary.getdataFromPropertyFile("timeout");
 	
 	JavaLibrary javautil=new JavaLibrary();
 	long time = javautil.stringToLong(timeout);
 	
-	String organization_name = MSExcelLibrary.getDataFromExcel("CreateOrganizationTest", 1, 1);
+	String organization_name = msExcelLibrary.getDataFromExcel("CreateOrganizationTest", 1, 1);
 	
 	WebDriver driver=null;
 	
@@ -62,10 +65,11 @@ public static void main(String[] args) throws IOException, InterruptedException 
 		break;
 	}
 
+	WebDriverLibrary webDriverLibrary = new WebDriverLibrary();
 	//testcase1:login to application...
-	WebDriverLibrary.navigateApp(url, driver);
-	WebDriverLibrary.browserSetting(time, driver);
-	WebDriverLibrary.maximizeBrowser(driver);
+	webDriverLibrary.navigateApp(url, driver);
+	webDriverLibrary.browserSetting(time, driver);
+	webDriverLibrary.maximizeBrowser(driver);
 	
  	driver.findElement(By.xpath("//input[@type='text']")).sendKeys(un);
  	driver.findElement(By.xpath("//input[@type='password']")).sendKeys(pwd);
@@ -75,7 +79,7 @@ public static void main(String[] args) throws IOException, InterruptedException 
 	if(driver.getTitle().contains("Home"))
 	{
  	
- 	      MSExcelLibrary.insertDataIntoExcel("testcases", 27, 8, "home page is displayed");
+ 	      msExcelLibrary.insertDataIntoExcel("testcases", 27, 8, "home page is displayed");
 		//wb.getSheet("testcases").getRow(27).createCell(8).setCellValue("home page is displayed");
 		//wb.getSheet("testcases").getRow(27).createCell(9).setCellValue("test case pass");	
 	}
@@ -91,8 +95,8 @@ public static void main(String[] args) throws IOException, InterruptedException 
  	
  	if(driver.getTitle().contains("Accounts&action"))
 	{
- 	MSExcelLibrary.insertDataIntoExcel("testcases", 28, 8, "organization page is displayed");
- 	MSExcelLibrary.insertDataIntoExcel("testcases", 28, 9, "test case pass");
+ 		msExcelLibrary.insertDataIntoExcel("testcases", 28, 8, "organization page is displayed");
+ 		msExcelLibrary.insertDataIntoExcel("testcases", 28, 9, "test case pass");
 	} 
 	//wb.close();
 	
@@ -123,15 +127,15 @@ public static void main(String[] args) throws IOException, InterruptedException 
  		//wb.close();
        }
        
-       MSExcelLibrary.writeDataIntoExcel(IconstantPath.EXCELFILEPATH);
-       MSExcelLibrary.closeExcelFile();
+       msExcelLibrary.writeDataIntoExcel(IconstantPath.EXCELFILEPATH);
+       msExcelLibrary.closeExcelFile();
 	
 	//testcase6:click on logout.....................
 	
 	Thread.sleep(2000);
 	WebElement ele1 = driver.findElement(By.xpath("//img[@src='themes/softed/images/user.PNG']"));
 	
-	WebDriverLibrary.mouseHoverOnTheElement(ele1, driver);
+	webDriverLibrary.mouseHoverOnTheElement(ele1, webDriverLibrary);
 	//Actions act=new Actions(driver);	
 	//act.moveToElement(ele1).perform();
 	Thread.sleep(2000);

@@ -74,12 +74,14 @@ public static void main(String[] args) throws IOException {
  		javautil.printStatement("tc fail");
  	}
 */ 	
+ 	WebDriverLibrary webDriverLibrary = new WebDriverLibrary();
    	 
 	WebElement ele2 = driver.findElement(By.xpath("//img[@src='themes/softed/images/user.PNG']"));
-	WebDriverLibrary.mouseHoverOnTheElement(ele2, driver);
+	webDriverLibrary.mouseHoverOnTheElement(ele2, webDriverLibrary);
 	
  	driver.findElement(By.xpath("//a[@href='index.php?module=Users&action=Logout']")).click();
- 	WebDriverLibrary.quitBrowser(driver);
+ 	
+	webDriverLibrary.quitBrowser(driver);
 	
 }
 }

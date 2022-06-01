@@ -22,8 +22,10 @@ public class TestNGPractice1Test{
 	
 	@DataProvider
 	public Object[][] multipledata1() throws EncryptedDocumentException, IOException{
-		MSExcelLibrary.openExcelFile(IconstantPath.EXCELFILEPATH);
-		return MSExcelLibrary.getMultipleDataFromEcxcel("multipledata");
+		MSExcelLibrary msExcelLibrary = new MSExcelLibrary();
+		
+		msExcelLibrary.openExcelFile(IconstantPath.EXCELFILEPATH);
+		return msExcelLibrary.getMultipleDataFromEcxcel("multipledata");
 	}
 	
 }
